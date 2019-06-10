@@ -7,7 +7,7 @@ import { IncomingMessage, ServerResponse } from 'http';
  * authorization URL to complete the flow.
  */
 export default function callback(req: IncomingMessage, res: ServerResponse) {
-    console.log('CALLBACK REQ', req);
+    console.log('CALLBACK REQ', JSON.stringify(req));
 	res.end('Redirecting...');
 	return null;
 }
