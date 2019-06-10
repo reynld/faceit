@@ -1,0 +1,17 @@
+.main-container {
+    width: 400px;
+    background: rgba(0,0,0,0.6);
+    border: 2px solid rgba(0,0,0,0.8);
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10px;
+    
+}
+
+.vs-middle {
+    font-size: 22px;
+    font-weight: 800;
+    margin: 5px;
+}
