@@ -35,11 +35,13 @@ class Player extends Component {
         const { payload } = this.state.playerInfo;
         const { right, player } = this.props;
 
+        console.log(this.state)
+
         return (
             <a 
               className="player-container" 
               style={right ? {flexDirection: "row-reverse"} : null }
-              href={"https://www.faceit.com/en/players/" + player.game_name}
+              href={"https://www.faceit.com/en/players/" + player.nickname}
               target="_blank"
             >
               {
