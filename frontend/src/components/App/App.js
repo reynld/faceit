@@ -99,7 +99,7 @@ export default class App extends React.Component{
                     </span>
                     {
                         this.state.show 
-                        ? <Faceit/>
+                        ? <Faceit nickname="hazed"/>
                         : null
                     }
                 </div>

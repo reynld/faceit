@@ -16,3 +16,8 @@
     font-weight: 800;
     margin: 5px;
 }
+
+.not-in-a-match {
+    width: 100%;
+    text-align: center;
+}
