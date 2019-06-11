@@ -4,7 +4,6 @@ import Player from './Player';
 class Team extends Component {
     render() {
         const { right, roster } = this.props;
-        console.log(roster);
         return (
             <div>
             {
