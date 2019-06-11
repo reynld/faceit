@@ -2,6 +2,7 @@ import React from 'react'
 import Authentication from '../../util/Authentication/Authentication'
 import Faceit from '../Faceit'
 import './App.css'
+import Logo from './Logo'
 
 export default class App extends React.Component{
     constructor(props){
@@ -13,8 +14,11 @@ export default class App extends React.Component{
         this.state={
             finishedLoading:false,
             theme:'light',
-            isVisible:true
+            isVisible:true,
+            show: false,
         }
+
+        this.showComponent = this.showComponent.bind(this)
     }
 
     contextUpdate(context, delta){
@@ -70,6 +74,10 @@ export default class App extends React.Component{
             this.twitch.unlisten('broadcast', ()=>console.log('successfully unlistened'))
         }
     }
+
+    showComponent() {
+        this.setState(() => ({show: !this.state.show}))
+    }
     
     render(){
         if(this.state.finishedLoading && this.state.isVisible){
@@ -82,7 +90,18 @@ export default class App extends React.Component{
                         <div>{this.Authentication.isModerator() ? <p>I am currently a mod, and here's a special mod button <input value='mod button' type='button'/></p>  : 'I am currently not a mod.'}</div>
                         <p>I have {this.Authentication.hasSharedId() ? `shared my ID, and my user_id is ${this.Authentication.getUserId()}` : 'not shared my ID'}.</p>
                     </div> */}
-                    <Faceit/>
+                    <span
+                        onClick={() => this.showComponent()}
+                        className="show-faceit-button"
+                        style={this.state.show ? {opacity: "1"}: null}
+                    >
+                        <Logo/>
+                    </span>
+                    {
+                        this.state.show 
+                        ? <Faceit/>
+                        : null
+                    }
                 </div>
             )
         }else{
