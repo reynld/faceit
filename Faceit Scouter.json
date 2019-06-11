@@ -4,35 +4,12 @@
   "backendFolderName": "",
   "extensionViews": [
     {
-      "id": "2",
-      "label": "panel",
-      "channelId": "30717537",
-      "configurationAnchor": "panel",
-      "displayChannelName": "obarrier",
-      "type": "panel",
-      "features": {
-        "isChatEnabled": true
-      },
-      "linked": false,
-      "linkedUserId": "",
-      "mode": "viewer",
-      "isPopout": false,
-      "role": "Broadcaster",
-      "x": 0,
-      "y": 0,
-      "orientation": "Portrait",
-      "frameSize": {
-        "width": 640,
-        "height": 480
-      }
-    },
-    {
-      "id": "3",
-      "label": "Component",
+      "id": "1",
+      "label": "",
       "channelId": "265737932",
       "configurationAnchor": "panel",
       "displayChannelName": "obarrier",
-      "type": "component",
+      "type": "video_overlay",
       "features": {
         "isChatEnabled": false
       },
@@ -122,7 +99,7 @@
     "whitelistedConfigUrls": [],
     "whitelistedPanelUrls": []
   },
-  "frontendCommand": "npm run start",
-  "frontendFolderName": "/Users/reynaldo/code/twitch/extensions-boilerplate",
+  "frontendCommand": "yarn start",
+  "frontendFolderName": "/Users/reynaldo/code/twitch/frontend",
   "name": "Faceit Scouter"
 }
