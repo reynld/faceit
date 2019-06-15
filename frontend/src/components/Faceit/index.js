@@ -12,8 +12,6 @@ class Faceit extends Component {
       matchData: {},
       userInfo: {},
       teamElo: {},
-      teamAElo: 0,
-      teamBElo: 0,
     };
 
     this.addUserElo = this.addUserElo.bind(this)
@@ -84,12 +82,13 @@ class Faceit extends Component {
     const { matchData } = this.state;
     const team1 = matchData.teams.faction1.id
     const team2 = matchData.teams.faction2.id
+
     if (num === 1) {
-      return this.state[team1] - this.state[team2]
+      return this.state[team1] - this.state[team2] || 0
     }
     
     if (num === 2) {
-      return this.state[team2] - this.state[team1]
+      return this.state[team2] - this.state[team1] || 0
     }
   }
 

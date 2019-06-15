@@ -7,7 +7,7 @@ class Team extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            teamAverage: null
+            teamAverage: 0
         }
         this.getTeamAverage = this.getTeamAverage.bind(this)
     }
@@ -16,7 +16,7 @@ class Team extends Component {
     getTeamAverage() {
         const { teamElo = {}, setTeamElo, teamId } = this.props;
         const userIds = Object.keys(teamElo);
-        if (userIds.length && this.state.teamAverage === null) {
+        if (userIds.length && this.state.teamAverage === 0) {
             const avg = userIds.reduce((a, b) => {
                 return a + teamElo[b]
             }, 0) / userIds.length;
