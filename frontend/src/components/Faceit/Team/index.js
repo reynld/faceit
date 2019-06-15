@@ -14,7 +14,7 @@ class Team extends Component {
 
 
     getTeamAverage() {
-        const { teamElo = {} } = this.props;
+        const { teamElo = {}, setTeamElo, teamId } = this.props;
         const userIds = Object.keys(teamElo);
         if (userIds.length && this.state.teamAverage === null) {
             const avg = userIds.reduce((a, b) => {
@@ -22,17 +22,25 @@ class Team extends Component {
             }, 0) / userIds.length;
             if (!isNaN(avg)){
                 this.setState(() => ({teamAverage: Math.ceil(avg)}))
+                setTeamElo(teamId, Math.ceil(avg))
             }
         }
     }
 
     render() {
         const { right, roster, addUserElo, teamId} = this.props;
+        const positive = this.props.teamDifference > 0;
         this.getTeamAverage()
         return (
             <div className="team-container">
                 <div className="team-avg">
                     {this.state.teamAverage}
+                    <span 
+                        className={`team-difference ${positive ? "positive" : ""}`}
+                    >   
+                        {positive ? "+" : ""}
+                        {this.props.teamDifference}
+                    </span>
                 </div>
             {
                 roster.map((player, i) => 

@@ -12,9 +12,13 @@ class Faceit extends Component {
       matchData: {},
       userInfo: {},
       teamElo: {},
+      teamAElo: 0,
+      teamBElo: 0,
     };
 
     this.addUserElo = this.addUserElo.bind(this)
+    this.setTeamElo = this.setTeamElo.bind(this)
+    this.getTeamDifference = this.getTeamDifference.bind(this)
   }
 
   componentDidMount() {
@@ -72,6 +76,23 @@ class Faceit extends Component {
     return {};
   }
 
+  setTeamElo(teamId, elo) {
+    this.setState(() => ({[teamId]: elo}))
+  }
+
+  getTeamDifference(num) {
+    const { matchData } = this.state;
+    const team1 = matchData.teams.faction1.id
+    const team2 = matchData.teams.faction2.id
+    if (num === 1) {
+      return this.state[team1] - this.state[team2]
+    }
+    
+    if (num === 2) {
+      return this.state[team2] - this.state[team1]
+    }
+  }
+
   render() {
     const { matchData, inMatch } = this.state;
     console.log('STATE', this.state)
@@ -86,14 +107,18 @@ class Faceit extends Component {
                 roster={matchData.teams.faction1.roster} 
                 addUserElo={this.addUserElo}
                 teamElo={this.getTeamElo(1)}
-              />
+                setTeamElo={this.setTeamElo}
+                teamDifference={this.getTeamDifference(1)}
+                />
               <span className="vs-middle">VS</span>
               <Team 
                 teamId={matchData.teams.faction2.id}
                 roster={matchData.teams.faction2.roster} 
+                right={true} 
                 addUserElo={this.addUserElo} 
                 teamElo={this.getTeamElo(2)}
-                right={true} 
+                setTeamElo={this.setTeamElo}
+                teamDifference={this.getTeamDifference(2)}
               />
             </React.Fragment>
           ) : (
