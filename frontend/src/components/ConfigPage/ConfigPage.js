@@ -46,6 +46,7 @@ export default class ConfigPage extends React.Component{
     }
 
     render(){
+        console.log('twitch', this.twitch)
         if(this.state.finishedLoading && this.Authentication.isModerator()){
             return(
                 <div className="Config">

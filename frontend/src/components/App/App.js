@@ -80,6 +80,7 @@ export default class App extends React.Component{
     }
     
     render(){
+        // console.log(this.twitch)
         if(this.state.finishedLoading && this.state.isVisible){
             return (
                 <div className="App">
@@ -99,7 +100,7 @@ export default class App extends React.Component{
                     </span>
                     {
                         this.state.show 
-                        ? <Faceit nickname="Lnar"/>
+                        ? <Faceit nickname="AslaN--"/>
                         : null
                     }
                 </div>

@@ -11,7 +11,10 @@ class Faceit extends Component {
       inMatch: false,
       matchData: {},
       userInfo: {},
+      teamElo: {},
     };
+
+    this.addUserElo = this.addUserElo.bind(this)
   }
 
   componentDidMount() {
@@ -35,6 +38,40 @@ class Faceit extends Component {
     })
   }
 
+  addUserElo(teamId, userId, elo) {
+    this.setState(prevState => {
+      let teamElo = Object.assign({}, prevState.teamElo);
+      if (!teamElo[teamId]) {
+        teamElo[teamId] = {}
+      }
+      if (!teamElo[teamId][userId]) {
+        teamElo[teamId][userId] = elo;
+        return {teamElo}
+      }
+    })
+  }
+
+  getTeamElo(num) {
+    const { matchData } = this.state;
+    if (num === 1 && this.state.teamElo[matchData.teams.faction1.id]) {
+      const team = this.state.teamElo[matchData.teams.faction1.id];
+      const userIds = Object.keys(team);
+      if (userIds.length == 5) {
+        return team
+      }
+    }
+
+    if (num === 2 && this.state.teamElo[matchData.teams.faction2.id]) {
+      const team = this.state.teamElo[matchData.teams.faction2.id];
+      const userIds = Object.keys(team);
+      if (userIds.length == 5) {
+        return team
+      }
+    }
+
+    return {};
+  }
+
   render() {
     const { matchData, inMatch } = this.state;
     console.log('STATE', this.state)
@@ -44,9 +81,20 @@ class Faceit extends Component {
         inMatch
           ? (
             <React.Fragment>
-              <Team roster={matchData.teams.faction1.roster}/>
+              <Team 
+                teamId={matchData.teams.faction1.id}
+                roster={matchData.teams.faction1.roster} 
+                addUserElo={this.addUserElo}
+                teamElo={this.getTeamElo(1)}
+              />
               <span className="vs-middle">VS</span>
-              <Team roster={matchData.teams.faction2.roster} right={true} />
+              <Team 
+                teamId={matchData.teams.faction2.id}
+                roster={matchData.teams.faction2.roster} 
+                addUserElo={this.addUserElo} 
+                teamElo={this.getTeamElo(2)}
+                right={true} 
+              />
             </React.Fragment>
           ) : (
             <div className="not-in-a-match">
