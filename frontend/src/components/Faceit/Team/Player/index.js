@@ -29,13 +29,21 @@ class Player extends Component {
       return `https://cdn-frontend.faceit.com/web/960/src/app/assets/images-compress/skill-icons/skill_level_${1}_svg.svg`
     }
 
+    getUserElo() {
+      const { payload } = this.state.playerInfo;
+      const { addUserElo, teamId } = this.props;
+      
+      if (payload) {
+        addUserElo(teamId, payload.guid, payload.games.battalion.faceit_elo)
+        return payload.games.battalion.faceit_elo
+      }
+    }
+
 
 
     render() {
         const { payload } = this.state.playerInfo;
         const { right, player } = this.props;
-
-        console.log(this.state)
 
         return (
             <a 
@@ -54,7 +62,7 @@ class Player extends Component {
                 style={right ? {alignItems: "flex-end"} : null }
               >
                 <h2>{ player.nickname }</h2>
-                <span>{payload && payload.games.battalion.faceit_elo}</span>
+                <span>{this.getUserElo()}</span>
               </div>
               <div 
                 className="player-skill-level"

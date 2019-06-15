@@ -1,0 +1,26 @@
+.team-container {
+    width: 100%;
+}
+
+.team-avg {
+    width: 100%;
+    text-align: center;
+    height: 24px;
+    font-size: 22px;
+    font-weight: 800;
+    color: #FF5500;
+    position: relative;
+}
+
+.team-difference {
+    color: rgb(255, 52, 52);
+    font-size: 16px;
+    position: absolute;
+    top: 4px;
+    right: 45px;
+}
+
+.team-difference.positive {
+    color: rgb(0, 211, 0);
+    font-size: 16px;
+}
