@@ -35,9 +35,9 @@ class Player extends Component {
                         <span className="elo">{userInfo.games.battalion.faceit_elo}</span>
                     </div>
                 </div>
-                <div className="match-history">
+                {/* <div className="match-history">
                     {this.getMatchHistory()}
-                </div>
+                </div> */}
             </div>
         );
     }
