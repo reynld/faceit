@@ -66,6 +66,24 @@ export default class App extends React.Component{
             this.twitch.onContext((context,delta)=>{
                 this.contextUpdate(context,delta)
             })
+
+            this.twitch.configuration.onChanged(()=>{
+                let config = this.twitch.configuration.broadcaster ? this.twitch.configuration.broadcaster.content : ""
+                console.log("CONFIG", config)
+                // try{
+                //     console.log('PRE PARSE', config)
+                //     config = JSON.parse(config)
+                // }catch(e){
+                //     console.error("Error: " + e)
+                //     config = {}
+                // }
+
+                // this.setState(()=>{
+                //     return{
+                //         commands:config
+                //     }
+                // })
+            })
         }
     }
 
@@ -80,7 +98,7 @@ export default class App extends React.Component{
     }
     
     render(){
-        // console.log(this.twitch)
+        console.log(this.twitch)
         if(this.state.finishedLoading && this.state.isVisible){
             return (
                 <div className="App">
