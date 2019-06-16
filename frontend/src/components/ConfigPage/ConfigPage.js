@@ -71,8 +71,8 @@ export default class ConfigPage extends React.Component{
     }
 
     saveConfig(){
+        const { nickname } = this.state;
         this.twitch.configuration.set('broadcaster', '0.0.1', JSON.stringify({nickname}))
-        this.setState(() => ({nickname}));
     }
 
     onChange(e) {
