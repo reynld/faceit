@@ -24,7 +24,7 @@ class Player extends Component {
             return `https://cdn-frontend.faceit.com/web/960/src/app/assets/images-compress/skill-icons/skill_level_${lvl}_svg.svg`
         }
         const { userInfo } = this.props
-        console.log('USER-INFO', userInfo)
+        // console.log('USER-INFO', userInfo)
         return (
             <div className="solo-container">
                 <div className="solo-info-container">

@@ -97,7 +97,7 @@ export default class App extends React.Component{
     }
     
     render(){
-        console.log(this.twitch)
+        // console.log(this.twitch)
         if(this.state.finishedLoading && this.state.isVisible){
             return (
                 <div className="App">
