@@ -1,6 +1,23 @@
 import React, { Component } from 'react';
+import './index.css';
 
 class Player extends Component {
+
+    componentDidMount() {
+
+    }
+
+    getMatchHistory() {
+        const matches = ['L', 'L', 'W', 'W', 'W']
+        return matches.map((l, i) => (
+            <div 
+                className={
+                    `result ${l == 'L' ? 'loss' : l == 'W' ? 'win' : 'tie'}`
+                } 
+                key={i}
+            >{l}</div>
+        ))
+    }
 
     render() {
         const getLevelSvg = (lvl) => {
@@ -9,11 +26,18 @@ class Player extends Component {
         const { userInfo } = this.props
         console.log('USER-INFO', userInfo)
         return (
-            <div>
-                <img src={userInfo.avatar} />
-                <h2>{userInfo.nickname}</h2>
-                <img src={getLevelSvg(userInfo.battalion_skill_level)} className="level-image"/>
-                <span>{userInfo.games.battalion.faceit_elo}</span>
+            <div className="solo-container">
+                <div className="solo-info-container">
+                    <img className="solo-avatar" src={userInfo.avatar} />
+                    <div className="solo-info">
+                        <h2>{userInfo.nickname}</h2>
+                        <img src={getLevelSvg(userInfo.battalion_skill_level)} className="level-image"/>
+                        <span className="elo">{userInfo.games.battalion.faceit_elo}</span>
+                    </div>
+                </div>
+                <div className="match-history">
+                    {this.getMatchHistory()}
+                </div>
             </div>
         );
     }

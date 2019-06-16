@@ -1,0 +1,62 @@
+.solo-container {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.solo-avatar {
+    height: 100px;
+}
+
+.solo-info-container {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100px;
+}
+
+.solo-info {
+    margin-left: 15px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+}
+
+.solo-info h2 {
+    font-size: 22px;
+    margin: 0px;
+    font-weight: 16px;
+}
+
+.solo-info > .elo {
+    font-weight: 800;
+    color: #FF5500;
+}
+
+
+.match-history {
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 auto;
+    margin-top: 16px;
+}
+
+.match-history > .result {
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.match-history > .win {
+    color: rgb(0, 211, 0);
+}
+.match-history > .loss {
+    color: rgb(255, 52, 52);
+}
+.match-history > .tie {
+    color: grey;
+}

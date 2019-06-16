@@ -100,7 +100,7 @@ class Faceit extends Component {
       {
         inMatch
           ? (
-            <React.Fragment>
+            <div className="match-container">
               <Team 
                 teamId={matchData.teams.faction1.id}
                 roster={matchData.teams.faction1.roster} 
@@ -119,7 +119,7 @@ class Faceit extends Component {
                 setTeamElo={this.setTeamElo}
                 teamDifference={this.getTeamDifference(2)}
               />
-            </React.Fragment>
+            </div>
           ) : (
             <div className="not-in-a-match">
               <span>Not currently in match</span>
