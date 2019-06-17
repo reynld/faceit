@@ -70,7 +70,6 @@ export default class App extends React.Component{
 
             this.twitch.configuration.onChanged(()=>{
                 let config = this.twitch.configuration.broadcaster ? this.twitch.configuration.broadcaster.content : {}
-                // console.log("CONFIG", config)
                 try{
                     config = JSON.parse(config)
                 }catch(e){
@@ -97,7 +96,6 @@ export default class App extends React.Component{
     }
     
     render(){
-        // console.log(this.twitch)
         if(this.state.finishedLoading && this.state.isVisible){
             return (
                 <div className="App">
@@ -111,8 +109,6 @@ export default class App extends React.Component{
                     {
                         this.state.show && this.state.nickname !== ""
                         ? <Faceit nickname={this.state.nickname}/>
-                        // this.state.show
-                        // ? <Faceit nickname={"nomerci"}/>
                         : null
                     }
                 </div>
