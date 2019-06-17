@@ -93,7 +93,6 @@ export default class ConfigPage extends React.Component{
         const { nickname } = this.state;
         const url = `https://api.faceit.com/core/v1/nicknames/${nickname}`
         axios.get(url).then(res => {
-            console.log('here',res)
             const { data } = res;
             if (data.result === "ok" && data.payload.nickname === nickname) {
                 this.setState({userInfo: data.payload, invalidNickname: false})

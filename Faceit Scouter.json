@@ -4,29 +4,6 @@
   "backendFolderName": "",
   "extensionViews": [
     {
-      "id": "1",
-      "label": "",
-      "channelId": "265737932",
-      "configurationAnchor": "panel",
-      "displayChannelName": "obarrier",
-      "type": "video_overlay",
-      "features": {
-        "isChatEnabled": false
-      },
-      "linked": false,
-      "linkedUserId": "",
-      "mode": "viewer",
-      "isPopout": false,
-      "role": "Broadcaster",
-      "x": 0,
-      "y": 0,
-      "orientation": "Portrait",
-      "frameSize": {
-        "width": 640,
-        "height": 480
-      }
-    },
-    {
       "id": "2",
       "label": "",
       "channelId": "30717537",
