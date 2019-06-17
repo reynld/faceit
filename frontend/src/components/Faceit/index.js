@@ -3,6 +3,7 @@ import Team from "./Team";
 
 import "./index.css";
 import axios from "axios";
+import Player from "./Player";
 
 class Faceit extends Component {
   constructor(props) {
@@ -94,13 +95,12 @@ class Faceit extends Component {
 
   render() {
     const { matchData, inMatch } = this.state;
-    console.log('STATE', this.state)
     return (
       <div className="main-container">
       {
         inMatch
           ? (
-            <React.Fragment>
+            <div className="match-container">
               <Team 
                 teamId={matchData.teams.faction1.id}
                 roster={matchData.teams.faction1.roster} 
@@ -119,10 +119,14 @@ class Faceit extends Component {
                 setTeamElo={this.setTeamElo}
                 teamDifference={this.getTeamDifference(2)}
               />
-            </React.Fragment>
+            </div>
           ) : (
             <div className="not-in-a-match">
-              Not currently in a match...
+              <span>Not currently in match</span>
+              {
+                this.state.userInfo.nickname &&
+                  <Player userInfo={this.state.userInfo}/>
+              }
             </div>
           )
       }

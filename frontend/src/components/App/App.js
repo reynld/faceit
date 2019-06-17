@@ -16,6 +16,7 @@ export default class App extends React.Component{
             theme:'light',
             isVisible:true,
             show: false,
+            nickname: "",
         }
 
         this.showComponent = this.showComponent.bind(this)
@@ -66,12 +67,27 @@ export default class App extends React.Component{
             this.twitch.onContext((context,delta)=>{
                 this.contextUpdate(context,delta)
             })
+
+            this.twitch.configuration.onChanged(()=>{
+                let config = this.twitch.configuration.broadcaster ? this.twitch.configuration.broadcaster.content : {}
+                try{
+                    config = JSON.parse(config)
+                }catch(e){
+                    config = { nickname: ""}
+                }
+
+                this.setState(()=>{
+                    return{
+                        nickname: config.nickname
+                    }
+                })
+            })
         }
     }
 
     componentWillUnmount(){
         if(this.twitch){
-            this.twitch.unlisten('broadcast', ()=>console.log('successfully unlistened'))
+            this.twitch.unlisten('broadcast', () => console.log('successfully unlistened'))
         }
     }
 
@@ -80,17 +96,9 @@ export default class App extends React.Component{
     }
     
     render(){
-        // console.log(this.twitch)
         if(this.state.finishedLoading && this.state.isVisible){
             return (
                 <div className="App">
-                    {/* <div className={this.state.theme === 'light' ? 'App-light' : 'App-dark'} >
-                        <p>Hello world!</p>
-                        <p>My token is: {this.Authentication.state.token}</p>
-                        <p>My opaque ID is {this.Authentication.getOpaqueId()}.</p>
-                        <div>{this.Authentication.isModerator() ? <p>I am currently a mod, and here's a special mod button <input value='mod button' type='button'/></p>  : 'I am currently not a mod.'}</div>
-                        <p>I have {this.Authentication.hasSharedId() ? `shared my ID, and my user_id is ${this.Authentication.getUserId()}` : 'not shared my ID'}.</p>
-                    </div> */}
                     <span
                         onClick={() => this.showComponent()}
                         className="show-faceit-button"
@@ -99,8 +107,8 @@ export default class App extends React.Component{
                         <Logo/>
                     </span>
                     {
-                        this.state.show 
-                        ? <Faceit nickname="ValorBarton"/>
+                        this.state.show && this.state.nickname !== ""
+                        ? <Faceit nickname={this.state.nickname}/>
                         : null
                     }
                 </div>
