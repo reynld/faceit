@@ -109,6 +109,8 @@ export default class App extends React.Component{
                     {
                         this.state.show && this.state.nickname !== ""
                         ? <Faceit nickname={this.state.nickname}/>
+                        // this.state.show
+                        // ? <Faceit nickname={"ValorBarton"}/>
                         : null
                     }
                 </div>
