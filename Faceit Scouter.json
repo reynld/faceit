@@ -25,6 +25,29 @@
         "width": 640,
         "height": 480
       }
+    },
+    {
+      "id": "3",
+      "label": "",
+      "channelId": "30717537",
+      "configurationAnchor": "video_overlay",
+      "displayChannelName": "obarrier",
+      "type": "video_overlay",
+      "features": {
+        "isChatEnabled": false
+      },
+      "linked": false,
+      "linkedUserId": "",
+      "mode": "viewer",
+      "isPopout": false,
+      "role": "Broadcaster",
+      "x": 0,
+      "y": 0,
+      "orientation": "Portrait",
+      "frameSize": {
+        "width": 640,
+        "height": 480
+      }
     }
   ],
   "manifest": {

@@ -32,8 +32,14 @@ class Faceit extends Component {
       this.setState(() => ({userInfo: res.data.payload}))
       axios.get(`https://api.faceit.com/match/v1/matches/groupByState?userId=${guid}`)
       .then(res => {
+        // console.log("RES", res)
+        // ['CHECKIN', 'READY', 'ONGOING']
         if (res.data.payload.ONGOING) {
           this.setState(() => ({matchData: res.data.payload.ONGOING[0], inMatch: true}))
+        } else if (res.data.payload.CHECKIN) {
+          this.setState(() => ({matchData: res.data.payload.CHECKIN[0], inMatch: true}))
+        } else if(res.data.payload.READY) {
+          his.setState(() => ({matchData: res.data.payload.READY[0], inMatch: true}))
         } else {
           this.setState(() => ({matchData: {}, inMatch: false}))
         }
