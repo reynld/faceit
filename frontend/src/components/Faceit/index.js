@@ -32,14 +32,16 @@ class Faceit extends Component {
       this.setState(() => ({userInfo: res.data.payload}))
       axios.get(`https://api.faceit.com/match/v1/matches/groupByState?userId=${guid}`)
       .then(res => {
-        // console.log("RES", res)
-        // ['CHECKIN', 'READY', 'ONGOING']
+        console.log("RES", res)
+        // ['CHECKIN', 'READY', 'ONGOING', 'VOTING']
         if (res.data.payload.ONGOING) {
           this.setState(() => ({matchData: res.data.payload.ONGOING[0], inMatch: true}))
         } else if (res.data.payload.CHECKIN) {
           this.setState(() => ({matchData: res.data.payload.CHECKIN[0], inMatch: true}))
         } else if(res.data.payload.READY) {
           his.setState(() => ({matchData: res.data.payload.READY[0], inMatch: true}))
+        } else if(res.data.payload.VOTING) {
+          his.setState(() => ({matchData: res.data.payload.VOTING[0], inMatch: true}))
         } else {
           this.setState(() => ({matchData: {}, inMatch: false}))
         }
@@ -101,6 +103,17 @@ class Faceit extends Component {
 
   render() {
     const { matchData, inMatch } = this.state;
+    const { nickname } = this.props;
+
+    if (nickname === "") {
+      return (
+        <div className="main-container">
+          <div className="not-in-a-match">
+            Nickname required check config
+          </div>
+        </div>
+      )
+    }
     return (
       <div className="main-container">
       {
