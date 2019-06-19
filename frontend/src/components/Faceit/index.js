@@ -55,7 +55,7 @@ class Faceit extends Component {
     })
   }
 
-  addUserElo(teamId, userId, elo = 1120) {
+  addUserElo(teamId, userId, elo = 1025) {
     this.setState(prevState => {
       let teamElo = Object.assign({}, prevState.teamElo);
       if (!teamElo[teamId]) {
