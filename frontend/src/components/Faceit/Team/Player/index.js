@@ -11,13 +11,14 @@ class Player extends Component {
 
       this.getLevelSvg = this.getLevelSvg.bind(this)
     }
-    componentDidMount() {
-        const { id } = this.props.player;
-        const url = `https://api.faceit.com/core/v1/users/${id}`;
 
-        axios.get(url).then(res => {
-            this.setState({ playerInfo: res.data})
-        })
+    componentDidMount() {
+      const { id } = this.props.player;
+      const url = `https://api.faceit.com/core/v1/users/${id}`;
+      console.log('ID', id)
+      axios.get(url).then(res => {
+          this.setState(() => ({ playerInfo: res.data}))
+      })
     }
 
     getLevelSvg() {
@@ -31,6 +32,7 @@ class Player extends Component {
 
     getUserElo() {
       const { payload } = this.state.playerInfo;
+      console.log("PAYLOAD", payload)
       const { addUserElo, teamId } = this.props;
       
       if (payload) {
