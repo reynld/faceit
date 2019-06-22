@@ -59,6 +59,7 @@
 .success-set {
     color: rgb(0, 211, 0);
     text-align: center;
+    margin-top: 10px;
 }
 
 .success-enabled {

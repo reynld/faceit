@@ -25,6 +25,7 @@ export default class ConfigPage extends React.Component{
         this.onChange = this.onChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
         this.getLevelSvg = this.getLevelSvg.bind(this)
+        this.setUserInfo = this.setUserInfo.bind(this)
     }
 
     contextUpdate(context, delta){
@@ -39,7 +40,6 @@ export default class ConfigPage extends React.Component{
         // do config page setup as needed here
         if(this.twitch){
             this.twitch.onAuthorized((auth)=>{
-                // console.log('AUTH', auth)
                 this.Authentication.setToken(auth.token, auth.userId)
                 if(!this.state.finishedLoading){
                     // if the component hasn't finished loading (as in we've not set up after getting a token), let's set it up now.
@@ -52,8 +52,6 @@ export default class ConfigPage extends React.Component{
             })
     
             this.twitch.onContext((context,delta)=>{
-                // console.log('CONTEXT', context)
-                // console.log('DELTA', delta)
                 this.contextUpdate(context,delta)
             })
 
@@ -66,13 +64,17 @@ export default class ConfigPage extends React.Component{
                     config = ""
                 }
 
-                this.setState(()=>{
-                    return{
-                        nickname: config.nickname
-                    }
-                })
+                if (config.nickname) {
+                    this.setState(()=>{
+                        return{
+                            nickname: config.nickname
+                        }
+                    })
+                    this.setUserInfo(config.nickname)
+                }
             })
         }
+
     }
 
     saveConfig(){
@@ -91,6 +93,10 @@ export default class ConfigPage extends React.Component{
     onSubmit(e) {
         e.preventDefault();
         const { nickname } = this.state;
+        this.setUserInfo(nickname)
+    }
+
+    setUserInfo(nickname) {
         const url = `https://api.faceit.com/core/v1/nicknames/${nickname}`
         axios.get(url).then(res => {
             const { data } = res;
@@ -126,35 +132,36 @@ export default class ConfigPage extends React.Component{
                             nickname={this.state.nickname} 
                             onChange={this.onChange}
                         />
-                        {
-                            this.state.hasSetName
-                                ? (<div className="faceit-preview">
+                            <div className="faceit-preview">
+                                {
+                                    avatar !== ""
+                                        ? <img src={avatar} className="preview-avatar"/>
+                                        : <span className="preview-avatar"></span>
+                                }
+                                <h2>{
+                                    this.state.invalidNickname 
+                                        ? "INVALID NICKNAME"
+                                        : nickname || "nickname"
+                                }</h2>
+                                <img className="preview-level" src={this.getLevelSvg(battalion_skill_level)}/>
+                                <button 
+                                    type="button" 
+                                    onClick={() => this.saveConfig(nickname)}
+                                    disabled={nickname === ""}
+                                >Set User</button>
+                            {
+                                this.state.hasSetName
+                                ? (<React.Fragment>
                                     <div className="success-set">
                                         Successfully set name
                                     </div>
                                     <div className="success-enabled">
                                         Overlay now enabled
                                     </div>
-                                </div>)
-                                : (<div className="faceit-preview">
-                                    {
-                                        avatar !== ""
-                                            ? <img src={avatar} className="preview-avatar"/>
-                                            : <span className="preview-avatar"></span>
-                                    }
-                                    <h2>{
-                                        this.state.invalidNickname 
-                                            ? "INVALID NICKNAME"
-                                            : nickname || "nickname"
-                                    }</h2>
-                                    <img className="preview-level" src={this.getLevelSvg(battalion_skill_level)}/>
-                                    <button 
-                                        type="button" 
-                                        onClick={() => this.saveConfig(nickname)}
-                                        disabled={nickname === ""}
-                                    >Set User</button>
-                                </div>)
-                        }
+                                </React.Fragment>)
+                                : null
+                            }
+                            </div>
                     </div>
                 </div>
             )

@@ -6,15 +6,15 @@ const Form = (props) => {
         <form onSubmit={onSubmit}>
             <h2>Steps</h2>
             <ol>
-                <li>check faceit nickname</li>
-                <li>set faceit user</li>
+                <li>Lookup Faceit nickname (CASE SENSITIVE)</li>
+                <li>Set Faceit user</li>
             </ol>
             <input 
                 name="nickname"
                 value={nickname}
                 onChange={onChange}
             />
-            <button type="submit">Check Nickname</button>
+            <button type="submit">Lookup Nickname</button>
         </form>
     );
 }
