@@ -20,26 +20,11 @@ module.exports = (_env,argv)=> {
       outputHtml:"video_overlay.html",
       build:true
     },
-    Panel:{
-      path:"./src/Panel.js",
-      outputHtml:"panel.html",
-      build:true
-    },
     Config:{
       path:"./src/Config.js",
       outputHtml:"config.html",
       build:true
     },
-    LiveConfig:{
-      path:"./src/LiveConfig.js",
-      outputHtml:"live_config.html",
-      build:true
-    },
-    Mobile:{
-      path:"./src/Mobile.js",
-      outputHtml:"mobile.html",
-      build:true
-    }
   }
 
   let entry = {}
@@ -87,6 +72,14 @@ module.exports = (_env,argv)=> {
           options:{
             name:"img/[name].[ext]"
           }
+        },
+        {
+          test: /\.scss$/,
+          use: [
+              "style-loader", // creates style nodes from JS strings
+              "css-loader", // translates CSS into CommonJS
+              "sass-loader" // compiles Sass to CSS, using Node Sass by default
+          ]
         }
       ]
     },
