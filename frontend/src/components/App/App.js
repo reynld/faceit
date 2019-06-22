@@ -1,7 +1,6 @@
 import React from 'react'
 import Authentication from '../../util/Authentication/Authentication'
 import Faceit from '../Faceit'
-import './App.css'
 import Logo from './Logo'
 
 export default class App extends React.Component{

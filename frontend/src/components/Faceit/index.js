@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import Team from "./Team";
-
-import "./index.css";
 import axios from "axios";
 import Player from "./Player";
 

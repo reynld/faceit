@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Player from './Player';
-import './index.css'
 
 class Team extends Component {
 

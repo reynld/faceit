@@ -2,7 +2,6 @@ import React from 'react'
 import axios from 'axios'
 import Authentication from '../../util/Authentication/Authentication'
 
-import './Config.css'
 import Form from './Form';
 
 export default class ConfigPage extends React.Component{
