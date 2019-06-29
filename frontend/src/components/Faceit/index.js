@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Team from "./Team";
 import axios from "axios";
-import Player from "./Player";
+import PlayerPanel from "./PlayerPanel";
 
 class Faceit extends Component {
   constructor(props) {
@@ -148,7 +148,7 @@ class Faceit extends Component {
               <span>Not currently in match</span>
               {
                 this.state.userInfo.nickname &&
-                  <Player userInfo={this.state.userInfo}/>
+                  <PlayerPanel userInfo={this.state.userInfo}/>
               }
             </div>
           )
