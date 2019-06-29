@@ -8,39 +8,49 @@ class Team extends Component {
         this.state = {
             teamAverage: 0
         }
-        this.getTeamAverage = this.getTeamAverage.bind(this)
+    }
+
+    componentDidUpdate() {
+        this.getTeamAverage();
     }
 
 
-    getTeamAverage() {
+    getTeamAverage = () => {
         const { teamElo = {}, setTeamElo, teamId } = this.props;
         const userIds = Object.keys(teamElo);
+
         if (userIds.length && this.state.teamAverage === 0) {
             const avg = userIds.reduce((a, b) => {
                 return a + teamElo[b]
             }, 0) / userIds.length;
             if (!isNaN(avg)){
-                this.setState(() => ({teamAverage: Math.ceil(avg)}))
+                this.setState({teamAverage: Math.ceil(avg)})
                 setTeamElo(teamId, Math.ceil(avg))
             }
         }
     }
 
+    renderTeamAverage = () => {
+        const { teamDifference } = this.props;
+        const positive = teamDifference > 0;
+        return (
+            <div className="team-avg">
+                { this.state.teamAverage }
+                <span 
+                    className={`team-difference ${positive ? "positive" : ""}`}
+                >   
+                    { positive ? "+" : "" }
+                    { teamDifference }
+                </span>
+            </div>
+        )
+    }
+
     render() {
         const { right, roster, addUserElo, teamId} = this.props;
-        const positive = this.props.teamDifference > 0;
-        this.getTeamAverage()
         return (
             <div className="team-container">
-                <div className="team-avg">
-                    {this.state.teamAverage}
-                    <span 
-                        className={`team-difference ${positive ? "positive" : ""}`}
-                    >   
-                        {positive ? "+" : ""}
-                        {this.props.teamDifference}
-                    </span>
-                </div>
+            { this.renderTeamAverage() }
             {
                 roster.map((player, i) => 
                     <Player 
